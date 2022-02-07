@@ -1,3 +1,5 @@
+import java.util.List;
+
 //Code from 
 //https://towardsdatascience.com/understanding-and-implementing-neural-networks-in-java-from-scratch-61421bb6352c
 
@@ -11,6 +13,20 @@ public class NeuralNetwork {
         bias_h= new Matrix(h,1);
         bias_o= new Matrix(o,1);
     }
+    
+    public List<Double> predict(double[] X){
+        Matrix input = Matrix.fromArray(X);
+        Matrix hidden = Matrix.multiply(weights_ih, input);
+        hidden.add(bias_h);
+        hidden.sigmoid();
+        
+        Matrix output = Matrix.multiply(weights_ho,hidden);
+        output.add(bias_o);
+        output.sigmoid();
+        
+        return output.toArray();
+    }
+
     
     
 }
